@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Laboratorio 10: Enrutamiento y páginas
 
-## Getting Started
+Aplicación web desarrollada con Next.js, TypeScript y Tailwind CSS. Incluye una Pokédex y un explorador de personajes de Rick and Morty con rutas estáticas y dinámicas.
 
-First, run the development server:
+## Funcionalidades
+
+- Listado de los primeros 151 Pokémon y fichas con tipos, estadísticas, altura, peso y habilidades.
+- Catálogo de personajes de Rick and Morty y búsqueda en tiempo real por nombre, estado, tipo y género.
+- Fichas de personajes con imagen, origen, ubicación, episodios y datos del registro.
+- Paginación de resultados y navegación a un personaje aleatorio.
+- Imágenes con carga bajo demanda y diseño adaptable a distintos tamaños de pantalla.
+- Pantallas personalizadas para errores y recursos no encontrados.
+- Generación de rutas estáticas y revalidación de datos: 24 horas para Pokémon y 10 días para Rick and Morty.
+
+## Tecnologías
+
+- Next.js con App Router.
+- React y TypeScript.
+- Tailwind CSS y React Icons.
+- PokeAPI y Rick and Morty API.
+
+## Instalación
+
+Se requiere Node.js y npm disponibles en la terminal.
+
+```bash
+git clone https://github.com/aleyto123/s10_Bellido_Rony_Enrutamiento-y-P-ginas.git
+cd s10_Bellido_Rony_Enrutamiento-y-P-ginas
+npm install
+```
+
+## Ejecutar en desarrollo
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+En PowerShell, si la política de ejecución bloquea `npm.ps1`, utilizar `npm.cmd`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+npm.cmd run dev
+```
 
-## Learn More
+## Rutas principales
 
-To learn more about Next.js, take a look at the following resources:
+| Ruta | Contenido |
+| --- | --- |
+| `/` | Portada y catálogo renderizado en el servidor. |
+| `/characters` | Catálogo estático de Rick and Morty. |
+| `/characters/search` | Búsqueda con filtros y paginación. |
+| `/characters/[id]` | Detalle del personaje por identificador; por ejemplo, `/characters/1`. |
+| `/pokemon` | Lista de los primeros 151 Pokémon. |
+| `/pokemon/[name]` | Detalle del Pokémon por nombre; por ejemplo, `/pokemon/pikachu`. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Comandos disponibles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Genera la compilación para producción. |
+| `npm run start` | Inicia la aplicación con la compilación de producción existente. |
+| `npm run lint` | Ejecuta ESLint. |
 
-## Deploy on Vercel
+Para ejecutar en modo producción, primero generar la compilación y luego iniciar el servidor:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm run start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Detener el servidor anterior con `Ctrl + C` antes de iniciar otro en el mismo puerto.
+
+## Estructura del proyecto
+
+```text
+src/
+├── app/             # Páginas, layouts, estilos y manejadores de errores
+│   ├── characters/  # Catálogo, búsqueda y detalle de personajes
+│   └── pokemon/     # Listado y detalle de Pokémon
+├── components/      # Componentes de interfaz y búsqueda
+├── lib/             # Consultas al servicio de personajes y configuración de caché
+└── types/           # Interfaces de las respuestas de las API
+```
+
+## Fuentes de datos
+
+- [PokeAPI](https://pokeapi.co/).
+- [Documentación de Rick and Morty API](https://rickandmortyapi.com/documentation/#character).
+
+Las consultas necesitan acceso a internet. La compilación obtiene los personajes disponibles para generar sus rutas estáticas.
